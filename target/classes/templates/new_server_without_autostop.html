@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>DevOps Instance Management System</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h1>AutoStop Instance Management System</h1>
+		<hr>
+		<h2>Save ServerWithoutAutostop</h2>
+
+		<form class="form-group"  
+				action="#" 
+				th:action="@{/saveServerWithoutAutostop}" 
+				th:object="${serverWithoutAutostop}"
+				method="POST">
+			
+			    RequestedBy:<input type="text" th:field="*{requestedPerson}"
+				placeholder="requestedPerson" required class="form-control mb-4 col-4">
+				
+				Jira Ticket:<input type="text" th:field="*{jiraTicket}"
+				placeholder="jiraTicket" required class="form-control mb-4 col-4">
+				
+				Team:<input type="text" th:field="*{teamName}"
+				placeholder="teamName" class="form-control mb-4 col-4">
+				
+				Instance:<input type="text" th:field="*{awsInstance}"
+				placeholder="awsInstance" required class="form-control mb-4 col-4">				
+				
+				AutostopTagRemovedDate(MM/dd/yyy)<input type="text" th:field="*{autostopTagRemovedDate}"
+				placeholder="autostopTagRemovedDate" class="form-control mb-4 col-4">				
+
+				AutostopTurnedBackDate(MM/dd/yyy)<input type="text" th:field="*{autostopTurnedBackDate}"
+				placeholder="autostopTurnedBackDate" class="form-control mb-4 col-4">
+				
+				ReimplementedDate(MM/dd/yyy)<input type="text" th:field="*{reimplementedDate}"
+				placeholder="reimplementedDate" class="form-control mb-4 col-4">				
+				
+				
+				  <div class="form-group">
+				    <label for="exampleFormControlTextarea1">Comments</label>
+				    <textarea class="form-control  mb-4 col-4" 
+				    id="commentTextarea" 
+				    th:field="*{comments}"
+				    placeholder="comments"
+				    rows="3">
+				    </textarea>
+				  </div>
+  
+  			
+							
+				
+				<button type="submit" class="btn btn-info col-2"> Save</button>
+		</form>
+		
+		<hr>
+		
+		<a th:href = "@{/}"> Back to ServerWithoutAutostop List</a>
+	</div>
+</body>
+</html>

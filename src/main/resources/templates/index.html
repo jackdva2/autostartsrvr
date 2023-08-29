@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>DevOps Instance Management System</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+	
+</head>
+<body>
+
+	<div class="container my-2">
+	<h1>Resource List</h1>
+	
+	<a th:href = "@{/showNewServerWithoutAutostopForm}" class="btn btn-primary btn-sm mb-3"> Add Instance Without Autostop </a>
+	<a th:href = "@{/export}" class="btn btn-primary btn-sm mb-3"> Export List</a>
+
+	
+		<table border="1" class = "table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=requestedPerson&sortDir=' + ${reverseSortDir}}">
+							Requested By</a>
+					</th>
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=teamName&sortDir=' + ${reverseSortDir}}">
+							Team</a>
+					</th>					
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=jiraTicket&sortDir=' + ${reverseSortDir}}">
+							Jira Ticket</a>
+					</th>					
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=awsInstance&sortDir=' + ${reverseSortDir}}">
+							Instance</a>
+					</th>
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=autostopTagRemovedDate&sortDir=' + ${reverseSortDir}}">
+							AutostopTagRemoved Date</a>
+					</th>	
+                    <th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=autostopTurnedBackDate&sortDir=' + ${reverseSortDir}}">
+							AutostopTurnedBack Date</a>
+					</th>
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=reimplementedDate&sortDir=' + ${reverseSortDir}}">
+							ReImplemented Date</a>
+					</th>					
+
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=comments&sortDir=' + ${reverseSortDir}}">
+							Comments</a>
+					</th>					
+					<th> Actions </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="server : ${listServerWithoutAutostop}">
+					<td th:text="${server.requestedPerson}"></td>
+					<td th:text="${server.teamName}"></td>
+					<td th:text="${server.jiraTicket}"></td>
+					<td th:text="${server.awsInstance}"></td>
+					<td th:text="${server.autostopTagRemovedDate}"></td>
+					<td th:text="${server.autostopTurnedBackDate}"></td>
+					<td th:text="${server.reimplementedDate}"></td>					
+					<td th:text="${server.comments}"></td>
+					<td> <a th:href="@{/showFormForUpdate/{id}(id=${server.id})}" class="btn btn-primary">Update</a>
+					    <a th:href="@{/deleteServerWithoutAutostop/{id}(id=${server.id})}" class="btn btn-danger">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<div th:if = "${totalPages > 1}">
+			<div class = "row col-sm-10">
+				<div class = "col-sm-2">
+					Total Rows: [[${totalItems}]] 
+				</div>
+				<div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+				</div>
+				<div class = "col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<span th:unless="${currentPage < totalPages}">Next</span>
+				</div>
+				
+				 <div class="col-sm-1">
+    				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span th:unless="${currentPage < totalPages}">Last</span>
+   				 </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

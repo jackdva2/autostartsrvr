@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>DevOps Instance Management System</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+		<h1>DevOps Instance Management System</h1>
+		<hr>
+		<h2>Update ServerWithoutAutostop</h2>
+
+		<form action="#" th:action="@{/saveServerWithoutAutostop}" th:object="${serverWithoutAutostop}"
+			method="POST">
+			
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{id}" />
+			
+			RequestedBy<input type="text" th:field="*{requestedPerson}" class="form-control mb-4 col-4">
+				
+				Jira Ticket:<input type="text" th:field="*{jiraTicket}" class="form-control mb-4 col-4">
+				
+				Team:<input type="text" th:field="*{teamName}" class="form-control mb-4 col-4">
+								
+				Instance:<input type="text" th:field="*{awsInstance}" class="form-control mb-4 col-4">
+				
+				AutostopTagRemovedDate(MM/dd/yyy):<input type="text" th:field="*{autostopTagRemovedDate}" class="form-control mb-4 col-4">
+
+				AutostopTurnedBackDate(MM/dd/yyy):<input type="text" th:field="*{autostopTurnedBackDate}" class="form-control mb-4 col-4">
+				
+				ReimplementedDate(MM/dd/yyy):<input type="text" th:field="*{reimplementedDate}" class="form-control mb-4 col-4">
+
+				Comments:<input type="text" th:field="*{comments}" class="form-control mb-4 col-4">
+
+				<button type="submit" class="btn btn-info col-2"> Update</button>
+		</form>
+		
+		<hr>
+		
+		<a th:href = "@{/}"> Back to ServerWithoutAutostop List</a>
+	</div>
+</body>
+</html>
